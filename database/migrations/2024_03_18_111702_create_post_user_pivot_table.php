@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->json(column: 'body')->nullable();
-            $table->foreignId(column: 'user_id');
+        Schema::create('post_user', function (Blueprint $table) {
+            $table->foreignId(column: 'user_id')->index();
             $table->foreign(columns: 'user_id')->on(table: 'users')->references(columns: 'id')->cascadeOnDelete();
-            $table->foreignId(column: 'post_id');
+            $table->foreignId(column: 'post_id')->index();
             $table->foreign(columns: 'post_id')->on(table: 'posts')->references(columns: 'id')->cascadeOnDelete();
+            $table->primary(['post_id', 'user_id']);
 
-            $table->timestamps();
+
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('post_user');
     }
 };
