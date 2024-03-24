@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
@@ -15,18 +14,22 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return new \Illuminate\Http\JsonResponse([
+            'data' => 'aaa'
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePostRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store()
     {
-        //
+        return new \Illuminate\Http\JsonResponse([
+            'data'=> 'posted'
+        ]);
     }
 
     /**
@@ -37,7 +40,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return new \Illuminate\Http\JsonResponse([
+            'data'=>$post
+        ]);
     }
 
     /**
@@ -47,9 +52,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update()
     {
-        //
+        return new \Illuminate\Http\JsonResponse([
+            'data'=> 'patched'
+        ]);
     }
 
     /**
@@ -58,8 +65,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy()
     {
-        //
+        return new \Illuminate\Http\JsonResponse([
+            'data'=> 'deleted'
+        ]);
     }
 }

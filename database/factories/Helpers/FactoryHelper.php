@@ -13,7 +13,7 @@ class FactoryHelper
         $count = $model::query()->count();
 
         if($count ===0 ){
-            //if model coint is 0
+            //if model count is 0
             //we should create a new record and retrieve the record id
 
             return $model::factory()->create()->id;

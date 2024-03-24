@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Http\Requests\StoreCommentRequest;
+use App\Models\User;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\Request;
 
 
-class CommentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         return new \Illuminate\Http\JsonResponse([
-            'data' => 'aaa'
+        'data' => 'aaa'
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCommentRequest  $request
+     * @param  \App\Http\Requests\StorePostRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store()
@@ -36,37 +37,39 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Comment $comment)
+    public function show(User $user)
     {
         return new \Illuminate\Http\JsonResponse([
-            'data'=>$comment
+            'data'=>$user
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\CommentRequest  $request
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Http\Requests\Request  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update()
-    {
+
+    public function update( User $user)
+     {
         return new \Illuminate\Http\JsonResponse([
-            'data'=> 'patched'
+        'data'=> 'patched'
         ]);
-    }
+     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy(User $user)
     {
         return new \Illuminate\Http\JsonResponse([
             'data'=> 'deleted'
