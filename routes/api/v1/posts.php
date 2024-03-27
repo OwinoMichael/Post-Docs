@@ -25,7 +25,7 @@ Route::middleware([
 
         Route::post('/posts', [\App\Http\Controllers\PostController::class, 'store'])->name('store');
 
-        Route::patch('/posts', [\App\Http\Controllers\PostController::class, 'update'])->name('update');
+        Route::patch('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update'])->name('update');
 
-        Route::delete('/posts', [\App\Http\Controllers\PostController::class, 'destroy'])->name('destroy');
+        Route::delete('/posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy'])->name('destroy')->whereNumber('post');
 });

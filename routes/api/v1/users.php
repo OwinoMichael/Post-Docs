@@ -55,9 +55,9 @@ Route::middleware([
 
         Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])->name('store');
 
-        Route::patch('/users', [\App\Http\Controllers\UserController::class, 'update'])->name('update');
+        Route::patch('/users/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('update');
 
-        Route::delete('/users', [\App\Http\Controllers\UserController::class, 'destroy'])->name('destroy');
+        Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('destroy');
 });
 
 
