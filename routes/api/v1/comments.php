@@ -20,7 +20,7 @@ Route::middleware([
         ;
        // Route::get('/comments', 'CommentsController@index')->name('index');
 
-        Route::get('/comments/{comments}', [\App\Http\Controllers\CommentController::class, 'show'])
+        Route::get('/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'show'])
             ->name('show')
           //  ->where('comments', '[0-9]+')
             ->whereNumber('comments')
@@ -28,9 +28,9 @@ Route::middleware([
 
         Route::post('/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('store');
 
-        Route::patch('/comments', [\App\Http\Controllers\CommentController::class, 'update'])->name('update');
+        Route::patch('/posts/{comment}', [\App\Http\Controllers\CommentController::class, 'update'])->name('update');
 
-        Route::delete('/comments', [\App\Http\Controllers\CommentController::class, 'destroy'])->name('destroy');
+        Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy'])->name('destroy');
 
 });
 

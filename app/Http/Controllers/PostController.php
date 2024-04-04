@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,24 +22,26 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     *
-     * @return \Illuminate\Http\JsonResponse
+     *  @return ResourceCollection
+     *  \Illuminate\Http\JsonResponse
      */
     public function index()
     {
+        $users = Post::query()->get();
 
-        $posts = Post::query()->get();
+        return PostResource::collection($users);
 
-        return new JsonResponse([
-            'data' => $posts
-        ]);
+        // return new JsonResponse([
+        //     'data' => $posts
+        // ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return PostResource
+     * \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -47,27 +52,32 @@ class PostController extends Controller
                 'body' => $request->body,
             ]);
 
-            $created->users()->sync($request->user_ids);
+            $created->users()->sync($request->user_id);
 
             return $created;
         });
 
-        return new JsonResponse([
-            'data' => $created
-        ]);
+        return new PostResource($created);
+
+        // return new JsonResponse([
+        //     'data' => $created
+        // ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\JsonResponse
+     * @return PostResource
+     *  \Illuminate\Http\JsonResponse
      */
     public function show(Post $post)
     {
-        return new JsonResponse([
-            'data' => $post,
-        ]);
+        // return new JsonResponse([
+        //     'data' => $post,
+        // ]);
+
+        return new PostResource($post);
     }
 
     /**
@@ -75,7 +85,8 @@ class PostController extends Controller
      *
      * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\JsonResponse
+     * @return PostResource | JsonResponse
+     *  \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Post $post)
     {
@@ -94,6 +105,8 @@ class PostController extends Controller
                 ], 400);
         }
 
+        //return new PostResource($post);
+
         return new JsonResponse([
             'data' => $post
         ]);
@@ -103,7 +116,8 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\JsonResponse
+     * @return PostResource | JsonResponse
+     *  \Illuminate\Http\JsonResponse
      */
     public function destroy(Post $post)
     {
@@ -116,6 +130,8 @@ class PostController extends Controller
                 ]
                 ], 400);
         }
+
+        //return new PostResource($deleted);
 
         return new JsonResponse([
             'data' => 'success'

@@ -2,39 +2,52 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return ResourceCollection
+     * \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $users = User::query()->get();
 
-        return new JsonResponse([
-            'data' => $users
-        ]);
+        return UserResource::collection($users);
+
+        // return new JsonResponse([
+        //     'data' => $users
+        // ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return Resource
+     * \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         $users = User::query()->create([
             'name' => $request->name,
             'email' => $request->email,
+            'password' => $request->password,
 
         ]);
+
+        return new UserResource($users);
     }
 
     /**
@@ -42,13 +55,16 @@ class UserController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\JsonResponse
+     * @return Resource
+     *  \Illuminate\Http\JsonResponse
      */
     public function show(User $user)
     {
-        return new JsonResponse([
-            'data' => $user,
-        ]);
+        return new UserResource($user);
+
+        // return new JsonResponse([
+        //     'data' => $user,
+        // ]);
     }
 
     /**
@@ -56,7 +72,7 @@ class UserController extends Controller
      *
      * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return Resource | JsonResponse
      */
 
     public function update(Request $request, User $user)
@@ -74,16 +90,19 @@ class UserController extends Controller
                 ], 400);
         }
 
-        return new JsonResponse([
-            'data' => $user,
-        ]);
+        return new UserResource($user);
+
+        // return new JsonResponse([
+        //     'data' => $user,
+        // ]);
      }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $users
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\User  $user
+     * @return Resource | JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(User $user)
     {
@@ -97,6 +116,8 @@ class UserController extends Controller
 
             ], 400);
        }
+
+
 
        return new JsonResponse([
         'data'=>'Successfully Deleted',
