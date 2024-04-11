@@ -18,11 +18,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->json(column: 'body')->nullable();
-            $table->foreignId(column: 'user_id');
-            $table->foreign(columns: 'user_id')->on(table: 'users')->references(columns: 'id')->cascadeOnDelete();
-            $table->foreignId(column: 'post_id');
-            $table->foreign(columns: 'post_id')->on(table: 'posts')->references(columns: 'id')->cascadeOnDelete();
+            $table->string(column: 'title');
+            $table->json('body')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->foreign('user_id')->on('users')->references('id')->cascadeOnDelete();
+            $table->foreignId('post_id')->nullable();
+            $table->foreign('post_id')->on('posts')->references('id')->cascadeOnDelete();
 
             $table->timestamps();
         });

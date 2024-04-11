@@ -11,7 +11,8 @@ class Comment extends Model
 
     protected $fillable = [
         'body',
-        
+        'title'
+
     ];
 
     protected $casts = [
@@ -20,11 +21,11 @@ class Comment extends Model
 
     public function post()
     {
-        return $this->belongsTo(Post::class, 'comment_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'comment_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

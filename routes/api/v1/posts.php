@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware([
     //'auth'
 ])
-->prefix('heyaa')
     ->as('posts.') //same as name()
     //->name('posts.')
     //->namespace("\App\Http\Controllers") //used to find controllers //Magical

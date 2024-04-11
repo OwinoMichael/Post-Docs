@@ -35,7 +35,6 @@ Route::middleware([
     //'auth'
 ])
 
-    ->prefix('heyaa')
     ->as('users.') //same as name()
     //->name('users.')
     //->namespace("\App\Http\Controllers") //used to find controllers //Magical

@@ -25,9 +25,10 @@ class PostController extends Controller
      *  @return ResourceCollection
      *  \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = Post::query()->get();
+        $pageSize = $request->page_size ?? 20;
+        $users = Post::query()->paginate($pageSize);
 
         return PostResource::collection($users);
 
