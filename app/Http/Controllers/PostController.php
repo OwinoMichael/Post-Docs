@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Repositories\PostRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -40,29 +41,18 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return PostResource
-     * \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, PostRepository $repository)
     {
-        $created = DB::transaction(function () use ($request){
-
-            $created = Post::query()->create([
-                'title' => $request->title,
-                'body' => $request->body,
-            ]);
-
-            $created->users()->sync($request->user_id);
-
-            return $created;
-        });
+        $created = $repository->create($request->only([
+            'title',
+            'body',
+            'user_ids'
+        ]));
 
         return new PostResource($created);
-
-        // return new JsonResponse([
-        //     'data' => $created
-        // ]);
     }
 
     /**
@@ -89,28 +79,15 @@ class PostController extends Controller
      * @return PostResource | JsonResponse
      *  \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Post $post, PostRepository $repository)
     {
+        $post = $repository->update($post, $request->only([
+           'title',
+           'body',
+           'user_ids',
+        ]));
 
-      //Explicit Array // $post->update($request->only(['title', 'body']));
-        $updated = $post->update([
-            'title' => $request->title ?? $post->title,
-            'body' => $request->body ?? $post->body,
-        ]);
-
-        if(!$updated){
-            return new JsonResponse([
-                'errors' => [
-                    'Failed to update model.'
-                ]
-                ], 400);
-        }
-
-        //return new PostResource($post);
-
-        return new JsonResponse([
-            'data' => $post
-        ]);
+        return new PostResource($post);
     }
 
     /**
@@ -120,17 +97,9 @@ class PostController extends Controller
      * @return PostResource | JsonResponse
      *  \Illuminate\Http\JsonResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post, PostRepository $repository)
     {
-        $deleted = $post->forceDelete();
-
-        if(!$deleted){
-            return new JsonResponse([
-                'errors' => [
-                    'Could not delete resource'
-                ]
-                ], 400);
-        }
+        $deleted = $post->forceDelete($post);
 
         //return new PostResource($deleted);
 
