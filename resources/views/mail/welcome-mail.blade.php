@@ -1,10 +1,15 @@
-@component("mail.welcome-mail")
+{{-- @component("mail.welcome-mail")
 
 # Welcome!!
 
 Thanks <br>
 Livepost
 
-@endcomponent
+@endcomponent --}}
+
+Hey {{$name}},
+
+Can your Laravel app send emails yet? ;)
+Mailtrap
 
 

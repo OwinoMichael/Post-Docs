@@ -9,7 +9,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-
 class WelcomeMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -19,7 +18,7 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $name)
     {
         //
     }
@@ -32,7 +31,7 @@ class WelcomeMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Welcome To Livepost',
+            subject: 'Welcome Mail',
         );
     }
 
@@ -44,7 +43,8 @@ class WelcomeMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.welcome-mail'
+            view: 'mail.welcome-mail',
+            with: ['name' => $this->name]
         );
     }
 
