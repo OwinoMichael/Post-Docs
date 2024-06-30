@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCommentRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,20 @@ class UpdateCommentRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
     public function rules()
     {
         return [
-            //
+            'name' => ['string', 'required'],
+            'email' => ['string','required', 'email']
+        ];
+    }
+
+    public function messages()
+    {
+        return
+        [
+            'email.email' => 'Please enter an email',
         ];
     }
 }

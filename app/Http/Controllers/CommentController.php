@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentStoreRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Repositories\CommentRepository;
@@ -26,10 +27,10 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CommentStoreRequest $request
      * @return CommentResource
      */
-    public function store(Request $request, CommentRepository $repository)
+    public function store(CommentStoreRequest $request, CommentRepository $repository)
     {
         $created = $repository->create($request->only([
             'title',

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommentRequest extends FormRequest
+class CommentStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['string', 'required'],
+            'body' => ['string', 'required'],
+            'user_id' => ['array', 'required'],
+            'post_id' => ['array', 'required']
+
+        ];
+    }
+
+    public function messages()
+    {
+        return
+        [
+            'title.required' => 'Please enter a Title'
         ];
     }
 }

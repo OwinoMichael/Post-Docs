@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\Models\User\userCreated;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -28,10 +29,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param UserStoreRequest $request
      * @return UserResource
      */
-    public function store(Request $request, UserRepository $repository)
+    public function store(UserStoreRequest $request, UserRepository $repository)
     {
         $created = $repository->create($request->only([
             'name',
