@@ -34,6 +34,8 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request, UserRepository $repository)
     {
+
+
         $created = $repository->create($request->only([
             'name',
             'email',

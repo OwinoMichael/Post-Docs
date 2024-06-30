@@ -1,0 +1,751 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/comments:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      title: Adeleke
+                      body: null
+                      created_at: '2024-04-05T11:03:00.000000Z'
+                      updated_at: '2024-04-05T11:11:08.000000Z'
+                  links:
+                    first: 'http://localhost/api/v1/comments?page=1'
+                    last: 'http://localhost/api/v1/comments?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/comments?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost/api/v1/comments'
+                    per_page: 20
+                    to: 1
+                    total: 1
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        title: Adeleke
+                        body: null
+                        created_at: '2024-04-05T11:03:00.000000Z'
+                        updated_at: '2024-04-05T11:11:08.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        title:
+                          type: string
+                          example: Adeleke
+                        body:
+                          type: string
+                          example: null
+                        created_at:
+                          type: string
+                          example: '2024-04-05T11:03:00.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-04-05T11:11:08.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost/api/v1/comments?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost/api/v1/comments?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/comments?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost/api/v1/comments'
+                      per_page:
+                        type: integer
+                        example: 20
+                      to:
+                        type: integer
+                        example: 1
+                      total:
+                        type: integer
+                        example: 1
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: vitae
+                body:
+                  type: string
+                  description: ''
+                  example: et
+                user_id:
+                  type: object
+                  description: ''
+                  example: []
+                  properties: {  }
+                post_id:
+                  type: object
+                  description: ''
+                  example: []
+                  properties: {  }
+              required:
+                - title
+                - body
+                - user_id
+                - post_id
+      security: []
+  '/api/v1/comments/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    title: Adeleke
+                    body: null
+                    created_at: '2024-04-05T11:03:00.000000Z'
+                    updated_at: '2024-04-05T11:11:08.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: Adeleke
+                      body:
+                        type: string
+                        example: null
+                      created_at:
+                        type: string
+                        example: '2024-04-05T11:03:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-04-05T11:11:08.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the comment.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/posts:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: "@return ResourceCollection\n \\Illuminate\\Http\\JsonResponse"
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    message: 'some error'
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: 'some error'
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: ''
+                  example: aperiam
+                body:
+                  type: string
+                  description: ''
+                  example: et
+                user_ids:
+                  type: object
+                  description: ''
+                  example: []
+                  properties: {  }
+              required:
+                - title
+                - body
+                - user_ids
+      security: []
+  '/api/v1/posts/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    title: debitis
+                    body: []
+                    created_at: '2024-04-05T11:36:08.000000Z'
+                    updated_at: '2024-04-05T11:36:08.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: debitis
+                      body:
+                        type: array
+                        example: []
+                      created_at:
+                        type: string
+                        example: '2024-04-05T11:36:08.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-04-05T11:36:08.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the post.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/users:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: 'Keshawn Gulgowski'
+                      email: cielo.jacobs@example.net
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 2
+                      name: 'Annetta Schumm PhD'
+                      email: mpurdy@example.org
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 3
+                      name: 'Hunter Reilly'
+                      email: ayden56@example.com
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 4
+                      name: 'Isac Schiller'
+                      email: heller.morris@example.net
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 5
+                      name: 'Keshaun Towne'
+                      email: white.demario@example.org
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 6
+                      name: 'Marcos Collins'
+                      email: tgaylord@example.com
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 7
+                      name: 'Lawrence Mann'
+                      email: wconn@example.com
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 8
+                      name: 'Kyle Goodwin'
+                      email: barrows.bartholome@example.com
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                    -
+                      id: 9
+                      name: 'Miss Felicita Kunze IV'
+                      email: eabshire@example.net
+                      created_at: '2024-04-05T11:36:08.000000Z'
+                      updated_at: '2024-04-05T11:36:08.000000Z'
+                  links:
+                    first: 'http://localhost/api/v1/users?page=1'
+                    last: 'http://localhost/api/v1/users?page=1'
+                    prev: null
+                    next: null
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 1
+                    links:
+                      -
+                        url: null
+                        label: '&laquo; Previous'
+                        active: false
+                      -
+                        url: 'http://localhost/api/v1/users?page=1'
+                        label: '1'
+                        active: true
+                      -
+                        url: null
+                        label: 'Next &raquo;'
+                        active: false
+                    path: 'http://localhost/api/v1/users'
+                    per_page: 20
+                    to: 9
+                    total: 9
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Keshawn Gulgowski'
+                        email: cielo.jacobs@example.net
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 2
+                        name: 'Annetta Schumm PhD'
+                        email: mpurdy@example.org
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 3
+                        name: 'Hunter Reilly'
+                        email: ayden56@example.com
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 4
+                        name: 'Isac Schiller'
+                        email: heller.morris@example.net
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 5
+                        name: 'Keshaun Towne'
+                        email: white.demario@example.org
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 6
+                        name: 'Marcos Collins'
+                        email: tgaylord@example.com
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 7
+                        name: 'Lawrence Mann'
+                        email: wconn@example.com
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 8
+                        name: 'Kyle Goodwin'
+                        email: barrows.bartholome@example.com
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                      -
+                        id: 9
+                        name: 'Miss Felicita Kunze IV'
+                        email: eabshire@example.net
+                        created_at: '2024-04-05T11:36:08.000000Z'
+                        updated_at: '2024-04-05T11:36:08.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Keshawn Gulgowski'
+                        email:
+                          type: string
+                          example: cielo.jacobs@example.net
+                        created_at:
+                          type: string
+                          example: '2024-04-05T11:36:08.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-04-05T11:36:08.000000Z'
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                        example: 'http://localhost/api/v1/users?page=1'
+                      last:
+                        type: string
+                        example: 'http://localhost/api/v1/users?page=1'
+                      prev:
+                        type: string
+                        example: null
+                      next:
+                        type: string
+                        example: null
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: integer
+                        example: 1
+                      from:
+                        type: integer
+                        example: 1
+                      last_page:
+                        type: integer
+                        example: 1
+                      links:
+                        type: array
+                        example:
+                          -
+                            url: null
+                            label: '&laquo; Previous'
+                            active: false
+                          -
+                            url: 'http://localhost/api/v1/users?page=1'
+                            label: '1'
+                            active: true
+                          -
+                            url: null
+                            label: 'Next &raquo;'
+                            active: false
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                              example: null
+                            label:
+                              type: string
+                              example: '&laquo; Previous'
+                            active:
+                              type: boolean
+                              example: false
+                      path:
+                        type: string
+                        example: 'http://localhost/api/v1/users'
+                      per_page:
+                        type: integer
+                        example: 20
+                      to:
+                        type: integer
+                        example: 9
+                      total:
+                        type: integer
+                        example: 9
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: provident
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: fgibson@example.net
+              required:
+                - name
+                - email
+      security: []
+  '/api/v1/users/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    id: 1
+                    name: 'Keshawn Gulgowski'
+                    email: cielo.jacobs@example.net
+                    created_at: '2024-04-05T11:36:08.000000Z'
+                    updated_at: '2024-04-05T11:36:08.000000Z'
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Keshawn Gulgowski'
+                      email:
+                        type: string
+                        example: cielo.jacobs@example.net
+                      created_at:
+                        type: string
+                        example: '2024-04-05T11:36:08.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2024-04-05T11:36:08.000000Z'
+      tags:
+        - Endpoints
+      security: []
+    patch:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
