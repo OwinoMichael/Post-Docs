@@ -20,8 +20,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        event(new userCreated(User::factory()->make()));
-        $users = User::query()->paginate($request->page_size ?? 20);
+        //event(new userCreated(User::factory()->make()));
+        $users = User::query()->paginate($request->page_size ?? 10);
 
         return UserResource::collection($users);
     }
