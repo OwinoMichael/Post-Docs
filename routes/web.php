@@ -32,16 +32,50 @@ Route::get('/reset-password/{token}', function ($token){
 
 
 
+Route::get('/shared/posts/{post}', function (\Illuminate\Http\Request $request, \App\Models\Post $post){
 
+    return "Specially made just for you 💕 ;) Post id: {$post->id}";
+
+})->name('shared.post')->middleware('signed');
 
 
 if(\Illuminate\Support\Facades\App::environment('local')){
 
+    // Route::get('/shared/videos/{video}', function (\Illuminate\Http\Request $request, $video){
+
+    //     // if(!$request->hasValidRelativeSignature()){
+    //     //     abort(401);
+    //     // }
+
+    //     return 'git gud';
+    // })->name('share-video')->middleware('signed');
+
+    // Lang::setLocale('en');
+    // $trans = \Illuminate\Support\Facades\Lang::get('auth.failed');
+    // $trans = __('auth.password');
+    // $trans = __('auth.throttle', ['seconds' => 5]);
+    // // current locale
+    // dump(\Illuminate\Support\Facades\App::currentLocale());
+    // dump(App::isLocale('en'));
+
+    // $trans = __('this is sparta');
+    // $trans = trans_choice('auth.pants', 2);
+    // $trans = trans_choice('auth.apples', 2, ['baskets' => 2]);
+    // $trans = __('auth.welcome', ['name' => 'sam']);
+
+    // dd($trans);
+
     Route::get('/playground', function (){
-        $user = \App\Models\User::factory()->make();
-        Mail::to($user)
-            ->send(new WelcomeMail($user));
+        // $user = \App\Models\User::factory()->make();
+        // Mail::to($user)
+        //     ->send(new WelcomeMail($user));
        //return null;
+
+       $url = URL::temporarySignedRoute('share-video', now()->addSecond(30), [
+            'video' => 123
+       ]);
+       return $url;
+
     });
 }
 

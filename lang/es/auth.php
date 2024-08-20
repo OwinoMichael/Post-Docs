@@ -13,11 +13,10 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'pants' => 'I have only one pant | I have lots of pants',
-    'apples' => '[*,0] There is no apple.|{1} There is one apple|[2,*] There are :count apples in :baskets baskets.',
-    'welcome' => 'HEYOOO :Name :NAME :name'
+    
+
+    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+    'password' => 'La contraseña proporcionada es incorrecta.',
+    'throttle' => 'Demasiados intentos de inicio de sesión. Inténtelo de nuevo en :segundos segundos.',
 
 ];

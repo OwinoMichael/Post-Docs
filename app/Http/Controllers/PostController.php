@@ -9,11 +9,14 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Notifications\PostSharedNotification;
 use App\Repositories\PostRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Notification;
+use URL;
 
 class PostController extends Controller
 {
@@ -110,4 +113,31 @@ class PostController extends Controller
             'data' => 'success'
         ]);
     }
+
+
+       /**
+     * Share a specified post from storage.
+     * @response 200 {
+    "data": "signed url..."
+     * }
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function share(Request $request, Post $post)
+    {
+        $url = URL::temporarySignedRoute('shared.post', now()->addDays(30), [
+            'post' => $post->id,
+        ]);
+
+        $users = User::query()->whereIn('id', $request->user_ids)->get();
+
+        Notification::send($users, new PostSharedNotification($post, $url));
+
+        return new JsonResponse([
+            'data' => $url,
+        ]);
+    }
+
+
 }
