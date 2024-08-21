@@ -65,17 +65,30 @@ if(\Illuminate\Support\Facades\App::environment('local')){
 
     // dd($trans);
 
-    Route::get('/playground', function (){
+    Route::get('/playground', function (\Illuminate\Http\Request $request){
         // $user = \App\Models\User::factory()->make();
         // Mail::to($user)
         //     ->send(new WelcomeMail($user));
        //return null;
 
-       $url = URL::temporarySignedRoute('share-video', now()->addSecond(30), [
-            'video' => 123
-       ]);
-       return $url;
 
+    //    $url = URL::temporarySignedRoute('share-video', now()->addSecond(30), [
+    //         'video' => 123
+    //    ]);
+    //    return $url;
+
+        event(new \App\Events\ChatMessageEvent('message'));
+        return null;
+
+    });
+
+    Route::get('/ws', function () {
+        return view('websocket');
+    });
+
+    Route::post('/chat-message', function (\Illuminate\Http\Request $request){
+        event(new \App\Events\ChatMessageEvent($request->message));
+        return null;
     });
 }
 
