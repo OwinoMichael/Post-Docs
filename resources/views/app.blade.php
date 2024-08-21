@@ -42,8 +42,8 @@ function getCookie(name){
         return request('/login', {
             method: "POST",
             body: JSON.stringify({
-                email: 'luz72@example.net',
-                'password': 'password'
+                email: 'dkonopelski@example.com',
+            'password': 'password'
             })
         })
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\WelcomeMail;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -77,7 +78,7 @@ if(\Illuminate\Support\Facades\App::environment('local')){
     //    ]);
     //    return $url;
 
-        event(new \App\Events\ChatMessageEvent('message'));
+        event(new \App\Events\ChatMessageEvent('message', auth()->user()));
         return null;
 
     });
@@ -87,7 +88,7 @@ if(\Illuminate\Support\Facades\App::environment('local')){
     });
 
     Route::post('/chat-message', function (\Illuminate\Http\Request $request){
-        event(new \App\Events\ChatMessageEvent($request->message));
+        event(new \App\Events\ChatMessageEvent($request->message, auth()->user()));
         return null;
     });
 }
