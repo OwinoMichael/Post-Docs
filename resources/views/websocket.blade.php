@@ -49,6 +49,8 @@
 
             <form id="form" class="w-100 d-flex flex-col">
 
+                <span id="span-typing"></span>
+
     {{--            <label for="input-message">Message:</label>--}}
                 <input
                         id="input-message"

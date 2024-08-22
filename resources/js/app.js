@@ -7,6 +7,7 @@ const listMessage = document.getElementById('list-messages');
 const inputEmail = document.getElementById('input-email');
 const inputPassword = document.getElementById('input-password');
 const avatars = document.getElementById('avatars');
+const spanTyping = document.getElementById('span-typing');
 form.addEventListener('submit', function (event) {
     event.preventDefault();
     const userInput = inputMessage.value;
@@ -112,35 +113,54 @@ document.getElementById('form-login').addEventListener('submit', function (event
     const password = inputPassword.value;
     login(email, password)
         .then(() => {
-            const channel = Echo.join('presence.chat.1');
 
-            
 
-            channel.here((users) => {
-                usersOnline = [...users];
-                renderAvatars();
-                console.log({users})
-                console.log('subscribedd!');
-            })
-                .joining((user) => {
-                    console.log({user}, 'joined')
-                    usersOnline.push(user);
-                    renderAvatars();
-                    addChatMessage(user.name, "has joined the room!");
-                })
-                .leaving((user) => {
-                    console.log({user}, 'leaving')
-                    usersOnline = usersOnline.filter((userOnline) => userOnline.id !== user.id);
-                    renderAvatars();
-                    addChatMessage(user.name, "has left the room.", 'grey');
-                })
+            updatePost();
 
-                .listen('.chat-message', (event) => {
-                    console.log(event);
-                    const message = event.message;
+            // const channel = Echo.join('presence.chat.1');
 
-                    addChatMessage(event.user.name, message);
-                })
+            // inputMessage.addEventListener('input', function(event){
+            //     console.log('aa');
+            //     if(inputMessage.value.length === 0){
+            //         channel.whisper('stop-typing');
+            //     }else{
+            //         channel.whisper('typing', {
+            //             email: email
+            //         })
+            //     }
+            // })
+
+            // channel.here((users) => {
+            //     usersOnline = [...users];
+            //     renderAvatars();
+            //     console.log({users})
+            //     console.log('subscribedd!');
+            // })
+            //     .joining((user) => {
+            //         console.log({user}, 'joined')
+            //         usersOnline.push(user);
+            //         renderAvatars();
+            //         addChatMessage(user.name, "has joined the room!");
+            //     })
+            //     .leaving((user) => {
+            //         console.log({user}, 'leaving')
+            //         usersOnline = usersOnline.filter((userOnline) => userOnline.id !== user.id);
+            //         renderAvatars();
+            //         addChatMessage(user.name, "has left the room.", 'grey');
+            //     })
+
+            //     .listen('.chat-message', (event) => {
+            //         console.log(event);
+            //         const message = event.message;
+
+            //         addChatMessage(event.user.name, message);
+            //     })
+            //     .listenForWhisper('typing', (event) => {
+            //         spanTyping.textContent = event.email + ' is typing...';
+            //     })
+            //     .listenForWhisper('stop-typing', (event)=> {
+            //         spanTyping.textContent = "";
+            //     })
 
 
         })
@@ -150,4 +170,22 @@ document.getElementById('form-login').addEventListener('submit', function (event
 
 
 
+function updatePost()
+{
+    const socket = new WebSocket(`ws://${window.location.hostname}:6001/socket/update-post?appkey=${process.env.MIX_PUSHER_APP_KEY}`);
 
+    socket.onopen = function (event) {
+        console.log('on open!!');
+
+        socket.send(JSON.stringify({
+           id: 1,
+           payload: {
+                title: 'abc123'
+           }
+        }))
+    }
+
+    socket.onmessage =  function (event){
+        console.log(event);
+    }
+}
